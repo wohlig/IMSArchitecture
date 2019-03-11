@@ -1,0 +1,215 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:p="http://www.evolus.vn/Namespace/Pencil"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Architecture For IMS</title>
+    <link rel="stylesheet" href="Resources/SampleStyle.css" />
+  </head>
+  <body>
+    <h1 id="documentTitle">Architecture For IMS</h1>
+    <p id="documentMetadata">
+      Exported at: Mon Mar 11 2019 17:08:27 GMT+0100 (CET)
+    </p>
+    <div class="Page" id="global_architecture_page">
+      <h2>Global Architecture</h2>
+      <div class="ImageContainer">
+        <img
+          src="pages/global_architecture.png"
+          width="946"
+          height="442"
+          usemap="#map_global_architecture"
+        />
+      </div>
+      <map name="map_global_architecture"></map>
+    </div>
+    <div class="Page" id="flow_for_adding_cache_in_ims_page">
+      <h2>Flow for Adding Cache in IMS</h2>
+      <div class="ImageContainer">
+        <img
+          src="pages/flow_for_adding_cache_in_ims.png"
+          width="946"
+          height="442"
+          usemap="#map_flow_for_adding_cache_in_ims"
+        />
+      </div>
+      <p class="Notes"></p>
+      <div>
+        <ol>
+          <li>
+            Request is sent from
+            <span style="font-weight: bold;">Microservice for Cache</span> to
+            the
+            <span style="font-weight: bold;">TUI Service Provider</span> with
+            the necessary parameters to get the Cache Data from the Service
+            Provider
+          </li>
+          <li>
+            Response is sent by the
+            <span style="font-weight: bold;">TUI Service Provider </span>to
+            <span style="font-weight: bold;">Microservice for Cache</span> with
+            the Cache Data in the Format which is different for each service
+            provider.
+          </li>
+          <li>
+            The Responses are then stored from the
+            <span style="font-weight: bold;">Microservice for Cache</span> to
+            <span style="font-weight: bold;"
+              >Database For Transformation (Temporary).</span
+            >
+          </li>
+          <li>
+            Once all the necessary requests are stored in the
+            <span style="font-weight: bold;"
+              >Database For Transformation (Temporary)</span
+            >. Microservice for Cache will fetch the data from
+            <span style="font-weight: bold;"
+              >Database For Transformation (Temporary)</span
+            >
+            and transform the Data for the API as required for
+            <span style="font-weight: bold;"
+              >Gateway Microservice for Cache.</span
+            >
+          </li>
+          <li>
+            API Data is Sent from
+            <span style="font-weight: bold;">Microservice for Cache</span> to
+            <span style="font-weight: bold;"
+              >Gateway Microservice for Cache.</span
+            >
+          </li>
+          <li>
+            <span style="font-weight: bold;"
+              >Gateway Microservice for Cache</span
+            >
+            send request to
+            <span style="font-weight: bold;">Caspian Data Lake</span>.
+          </li>
+          <li>
+            <span style="font-weight: bold;"
+              >Gateway Microservice for Cache</span
+            >
+            send the data to <span style="font-weight: bold;">IMS</span> in
+            exactly the same format as required by IMS.<br /><br />
+          </li>
+        </ol>
+      </div>
+      <p></p>
+      <map name="map_flow_for_adding_cache_in_ims"></map>
+    </div>
+    <div class="Page" id="flow_for_booking_page">
+      <h2>Flow for Booking</h2>
+      <div class="ImageContainer">
+        <img
+          src="pages/flow_for_booking.png"
+          width="946"
+          height="442"
+          usemap="#map_flow_for_booking"
+        />
+      </div>
+      <p class="Notes"></p>
+      <div>
+        <ol>
+          <li>
+            On Booking Request in <span style="font-weight: bold;">IMS</span> an
+            API call is sent to
+            <span style="font-weight: bold;"
+              >Microservice for Booking and Real-time Data</span
+            >
+            this request is then formatted as per the standard API Requirement
+            for
+            <span style="font-weight: bold;"
+              >Microservice for Real-Time Prices and Booking Per Supplier</span
+            >.
+          </li>
+          <li>
+            Data from
+            <span style="font-weight: bold;"
+              >Microservice for Booking and Real-time Data</span
+            >
+            the
+            <span style="font-weight: bold;"
+              >Microservice for Real-Time Prices and Booking Per Supplier.</span
+            >
+          </li>
+          <li>
+            Data is sent from<span style="font-weight: bold;">
+              Microservice for Real-Time Prices and Booking Per Supplier</span
+            >
+            to the
+            <span style="font-weight: bold;">TUI Service Supplier</span> in the
+            format as required by TUI Service Supplier.<br /><br />
+          </li>
+          <li>
+            Booking is made on the
+            <span style="font-weight: bold;">TUI Service Supplier </span>and the
+            response of the Booking is sent back to the
+            <span style="font-weight: bold;"
+              >Microservice for Real-Time Prices and Booking Per Supplier.</span
+            >
+          </li>
+          <li>
+            <span style="font-weight: bold;"
+              >Microservice for Real-Time Prices and Booking Per Supplier</span
+            >
+            then converts the data into the format required for
+            <span style="font-weight: bold;"
+              >Microservice for Bookings and Real-time Data.</span
+            >
+          </li>
+          <li>
+            <span style="font-weight: bold;"
+              >Microservice for Bookings and Real-time Data</span
+            >
+            send the Data to the
+            <span style="font-weight: bold;"
+              >Database for Storing Booking Data (Permanant)</span
+            >
+            to store all the booking data along with the request and the
+            response.
+          </li>
+          <li>
+            <span style="font-weight: bold;"
+              >Microservice for Bookings and Real-time Data</span
+            >
+            send the
+            <span style="font-weight: bold;"
+              >Data to the Caspian Data Lake</span
+            >
+            along with Request and the Response.
+          </li>
+          <li>
+            <span style="font-weight: bold;"
+              >Microservice for Bookings and Real-time Data</span
+            >
+            transform the response as per the IMS standards and send back to
+            <span style="font-weight: bold;">IMS</span>.
+          </li>
+          <li>
+            In Case of Successful booking
+            <span style="font-weight: bold;"
+              >Microservice for Bookings and Real-time Data</span
+            >
+            send the Booking Data to the
+            <span style="font-weight: bold;"
+              >Microservice for SAP Integrations.</span
+            >
+          </li>
+          <li>
+            <span style="font-weight: bold;"
+              >Microservice for SAP Integrations</span
+            >
+            finally send the Data to
+            <span style="font-weight: bold;"
+              >SAP for the Billing Management.</span
+            >
+          </li>
+        </ol>
+      </div>
+      <p></p>
+      <map name="map_flow_for_booking"></map>
+    </div>
+  </body>
+</html>

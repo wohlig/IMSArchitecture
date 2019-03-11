@@ -1,0 +1,17 @@
+/*
+    place extra stylesheet here
+*/
+@import url("https://fonts.googleapis.com/css?family=Lato:100,200,300,400");
+body {
+  font-family: "Lato";
+}
+.ImageContainer img {
+  border: solid 2px #999;
+}
+#documentMetadata {
+  font-size: 10px;
+}
+ol li {
+  padding-bottom: 5px;
+  font-weight: 300;
+}
